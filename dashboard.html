@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Dashboard — Next Toppers</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- floating emojis -->
+<div class="float heart" style="left:10%"></div>
+<div class="float balloon" style="left:30%"></div>
+<div class="float heart" style="left:50%"></div>
+<div class="float balloon" style="left:70%"></div>
+
+<header class="landing-header glass">
+  <div class="brand">NEXT TOPPERS</div>
+  <div class="hello typewriter" id="welcomeText"></div>
+  <button class="btn ghost" onclick="logout()">Logout</button>
+</header>
+
+<main class="landing page glass" style="margin-top:80px">
+  <div class="cards">
+    <article class="card c1" onclick="showSection('acp')">
+      <h3>Solve ACP</h3>
+      <p>Practice MCQs by subject & chapter</p>
+    </article>
+    <article class="card c2" onclick="showSection('quiz')">
+      <h3>Quiz</h3>
+      <p>Quick test of concepts</p>
+    </article>
+    <article class="card c3" onclick="showSection('notes')">
+      <h3>Notes</h3>
+      <p>Study material</p>
+    </article>
+    <article class="card c4" onclick="showSection('contact')">
+      <h3>Contact</h3>
+      <p>Send me an email</p>
+    </article>
+  </div>
+
+  <!-- ACP Section -->
+  <section id="acp" class="section glass" style="margin-top:40px;display:none">
+    <h2>ACP Practice</h2>
+    <div class="tabs">
+      <div class="tab active" onclick="switchACP('physics',this)">Physics</div>
+      <div class="tab" onclick="switchACP('chemistry',this)">Chemistry</div>
+      <div class="tab" onclick="switchACP('biology',this)">Biology</div>
+    </div>
+    <div id="acp-chapters"></div>
+    <div id="acp-list"></div>
+    <button class="btn" onclick="checkACP()">Check Score</button>
+  </section>
+
+  <!-- Quiz Section -->
+  <section id="quiz" class="section glass" style="margin-top:40px;display:none">
+    <h2>Quiz</h2>
+    <div id="quiz-list"></div>
+    <button class="btn" onclick="check('quiz')">Check Score</button>
+  </section>
+
+  <!-- Notes Section -->
+  <section id="notes" class="section glass" style="margin-top:40px;display:none">
+    <h2>Notes</h2>
+    <div class="tabs">
+      <div class="tab active" onclick="switchNotes('physics',this)">Physics</div>
+      <div class="tab" onclick="switchNotes('chemistry',this)">Chemistry</div>
+      <div class="tab" onclick="switchNotes('biology',this)">Biology</div>
+    </div>
+    <div id="notes-chapters"></div>
+    <div id="notes-content"></div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section glass" style="margin-top:40px;display:none">
+    <h2>Contact Me</h2>
+    <form onsubmit="sendMail(event)">
+      <input name="subject" placeholder="Subject" required>
+      <textarea name="message" placeholder="Your message" rows="5" required></textarea>
+      <button type="submit" class="btn">Send Email</button>
+    </form>
+  </section>
+</main>
+
+<script src="app.js"></script>
+<script>
+  // show username after login
+  const u=localStorage.getItem('sp_user');
+  if(!u){window.location.href='login.html';}
+  else{
+    const name=JSON.parse(u).name.split(' ')[0];
+    document.getElementById('welcomeText').textContent='Welcome back dear '+name;
+  }
+</script>
+</body>
+</html>
